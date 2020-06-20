@@ -29,6 +29,7 @@ export type Props = {
   style?: CSSProperties;
   theme?: Theme;
   years?: number[];
+  hideText?: boolean;
 };
 
 const GitHubCalendar: React.FC<Props> = ({
@@ -43,6 +44,7 @@ const GitHubCalendar: React.FC<Props> = ({
   username,
   style = {},
   years = [Number(format(new Date(), 'yyyy'))],
+  hideText,
 }) => {
   const [graphs, setGraphs] = useState<GraphData[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -195,7 +197,7 @@ const GitHubCalendar: React.FC<Props> = ({
 
   return (
     <article className={NAMESPACE} style={style}>
-      {renderTitle()}
+      {!hideText && renderTitle()}
       {graphs.map(graph => {
         const { year, blocks, monthLabels, totalCount } = graph;
 
@@ -213,7 +215,7 @@ const GitHubCalendar: React.FC<Props> = ({
               {renderBlocks(blocks)}
             </svg>
 
-            {renderMeta(year, totalCount)}
+            {!hideText && renderMeta(year, totalCount)}
             {children}
           </div>
         );
