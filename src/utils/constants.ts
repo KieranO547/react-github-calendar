@@ -12,7 +12,7 @@ export type Theme = {
 
 export const DEFAULT_THEME = {
   background: 'transparent',
-  text: '#000',
+  text: 'var(--color-text-primary)',
   grade4: '#196127',
   grade3: '#239a3b',
   grade2: '#7bc96f',
