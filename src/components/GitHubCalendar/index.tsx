@@ -29,6 +29,7 @@ export type Props = {
   style?: CSSProperties;
   theme?: Theme;
   years?: number[];
+  loadingIcon?: React.JSXElement;
   hideText?: boolean;
   onErrorChildren?: React.JSXElement;
 };
@@ -45,6 +46,7 @@ const GitHubCalendar: React.FC<Props> = ({
   username,
   style = {},
   years = [Number(format(new Date(), 'yyyy'))],
+  loadingIcon,
   hideText,
   onErrorChildren,
 }) => {
@@ -197,7 +199,7 @@ const GitHubCalendar: React.FC<Props> = ({
   }
 
   if (!graphs) {
-    return <div className={getClassName('loading', styles.loading)}>Loading …</div>;
+    return <div className={getClassName('loading', styles.loading)}>{loadingIcon || 'Loading …'}</div>;
   }
 
   return (
