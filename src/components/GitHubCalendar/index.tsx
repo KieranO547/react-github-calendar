@@ -30,6 +30,7 @@ export type Props = {
   theme?: Theme;
   years?: number[];
   hideText?: boolean;
+  onErrorChildren?: React.JSXElement;
 };
 
 const GitHubCalendar: React.FC<Props> = ({
@@ -45,6 +46,7 @@ const GitHubCalendar: React.FC<Props> = ({
   style = {},
   years = [Number(format(new Date(), 'yyyy'))],
   hideText,
+  onErrorChildren,
 }) => {
   const [graphs, setGraphs] = useState<GraphData[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -188,6 +190,9 @@ const GitHubCalendar: React.FC<Props> = ({
 
   if (error) {
     console.error(error);
+    if(onErrorChildren) {
+      return onErrorChildren
+    }
     return <p>Error :(</p>;
   }
 
